@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatSkill AI - Learn & Earn</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background: #f4f7fe; font-family: 'Segoe UI', sans-serif; padding-bottom: 80px; }
+        .hero-section { background: #007bff; color: white; padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
+        .course-card { border-radius: 15px; border: none; transition: 0.3s; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        #chat-window { width: 300px; height: 400px; border-radius: 15px; position: fixed; bottom: 85px; right: 20px; z-index: 1000; display: none; background: white; }
+        .points-badge { background: #ffc107; color: #000; font-weight: bold; border-radius: 20px; padding: 5px 15px; display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand font-weight-bold" href="#">BharatSkill AI</a>
+    </nav>
+
+    <div class="hero-section">
+        <h1>अपनी भाषा, अपनी प्रगति</h1>
+        <p>AI कोर्सेस सीखें और गिग्स के लिए पॉइंट्स कमाएं</p>
+        <div class="points-badge">आपके पॉइंट्स: <span id="points">0</span></div>
+    </div>
+
+    <div class="container mt-4">
+        <div id="video-player-section" class="d-none mb-4 text-center">
+            <div class="embed-responsive embed-responsive-16by9 rounded shadow">
+                <div id="player"></div>
+            </div>
+            <button class="btn btn-danger btn-sm mt-2" onclick="closeVideo()">वीडियो बंद करें</button>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400" class="card-img-top" alt="Python">
+                    <div class="card-body">
+                        <h5>Python AI Course (Hindi)</h5>
+                        <p class="small text-muted">Learn coding from scratch.</p>
+                        <button class="btn btn-primary btn-block" onclick="startCourse('python')">कोर्स शुरू करें</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ai-chat-bubble" onclick="toggleChat()" style="position:fixed; bottom:20px; right:20px; z-index:1000; cursor:pointer;">
+        <div class="bg-primary text-white p-3 rounded-circle shadow-lg font-weight-bold text-center" style="width:60px; height:60px;">AI</div>
+    </div>
+
+    <div id="chat-window" class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">Bharat Assistant</div>
+        <div id="chat-body" class="card-body overflow-auto bg-light" style="height:250px;">
+            <p class="small bg-white p-2 rounded shadow-sm">नमस्ते! मैं भारत AI हूँ। आप क्या सीखना चाहते हैं?</p>
+        </div>
+        <div class="card-footer p-2">
+            <input type="text" id="user-query" class="form-control" placeholder="यहाँ लिखें..." onkeypress="if(event.key==='Enter') askAI()">
+        </div>
+    </div>
+
+    <script>
+        let points = 0;
+
+        function startCourse(course) {
+            const playerSection = document.getElementById('video-player-section');
+            const playerDiv = document.getElementById('player');
+            playerSection.classList.remove('d-none');
+            // Sample Python Video ID
+            let videoId = 'rfscVS0vtbw'; 
+            playerDiv.innerHTML = `<iframe width="100%" height="300" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+            
+            points += 50;
+            document.getElementById('points').innerText = points;
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function closeVideo() { 
+            document.getElementById('video-player-section').classList.add('
